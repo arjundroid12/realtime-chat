@@ -59,6 +59,7 @@ This app requires a **Node.js backend** (Socket.io WebSockets), so it can't run 
 | **DigitalOcean App Platform** | `npm install` | `npm start` | 3 free static apps |
 
 For any of these, just connect your GitHub repo and use the commands above.
+DEMO LIVE : https://realtime-chat-vy6o.onrender.com/
 
 ## 📦 Run Locally
 
