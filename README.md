@@ -31,10 +31,34 @@
 
 ## 🚀 Live Demo
 
-This app requires a backend server (it can't run on GitHub Pages because Pages only serves static files). Deploy it to any Node.js host:
+This app requires a **Node.js backend** (Socket.io WebSockets), so it can't run on GitHub Pages or Surge.sh (which are static-only). Deploy it free to any Node host below.
 
-- **Render** (recommended, free tier) — see deployment instructions below
-- **Railway**, **Fly.io**, **Vercel** (with adapter), **Heroku**, **DigitalOcean App Platform**
+### ⚡ One-Click Deploy to Render (recommended, free)
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/arjundroid12/realtime-chat)
+
+**Steps (~2 minutes):**
+1. Click the button above
+2. Sign in to Render with your GitHub account (1 click — no credit card needed)
+3. Click **"Create Web Service"** (defaults are pre-filled from `render.yaml`)
+4. Wait ~90 seconds for build & deploy
+5. Your live URL will be `https://realtime-chat-xxxx.onrender.com` (Render shows it at the top-left of your service dashboard)
+
+**Notes:**
+- Render free tier **sleeps after 15 min of inactivity** — the first request after sleep takes ~30 sec to wake up. Subsequent requests are fast.
+- The app deploys to Render's **Singapore region** (closest to India, low latency).
+- Health check endpoint `/health` is configured so Render knows when the app is ready.
+
+### 🛠️ Manual Deploy to Other Hosts
+
+| Host | Build Command | Start Command | Free Tier |
+|------|---------------|---------------|-----------|
+| **Railway** | `npm install` | `npm start` | Free trial then $5/mo |
+| **Fly.io** | `npm install` | `npm start` | Free (needs credit card) |
+| **Heroku** | `npm install` | `npm start` | Free tier discontinued |
+| **DigitalOcean App Platform** | `npm install` | `npm start` | 3 free static apps |
+
+For any of these, just connect your GitHub repo and use the commands above.
 
 ## 📦 Run Locally
 
@@ -94,26 +118,6 @@ npm run dev
 | `room:users`     | `{ users: [{ id, nick }] }`                         | Updated user list        |
 | `typing:update`  | `{ id, nick, typing }`                              | Typing state change      |
 
-## 🚢 Deploy to Render (free tier)
-
-1. Push this repo to GitHub (already done if you're reading this on GitHub!)
-2. Go to https://render.com and sign in with GitHub
-3. **New +** → **Web Service** → select this repo
-4. Configure:
-   - **Name**: `realtime-chat` (or anything you like)
-   - **Runtime**: Node
-   - **Build Command**: `npm install`
-   - **Start Command**: `npm start`
-   - **Instance Type**: Free
-5. **Create Web Service**
-6. Wait ~1-2 min for build & deploy. Render will give you a URL like `https://realtime-chat-xxxx.onrender.com`
-
-### Other deployment options
-
-- **Railway**: `railway up` from the project root
-- **Fly.io**: `fly launch` then `fly deploy`
-- **Heroku**: `heroku create && git push heroku main`
-
 ## 🧪 CI/CD
 
 GitHub Actions workflow (`.github/workflows/ci.yml`) on every push and PR:
@@ -140,6 +144,7 @@ realtime-chat/
 ├── src/
 │   └── server.js            # Express + Socket.io server
 ├── package.json
+├── render.yaml              # One-click Render deploy config
 ├── LICENSE
 ├── README.md
 └── .gitignore

@@ -1,0 +1,22 @@
+# Render Blueprint for Realtime Chat
+# https://render.com/docs/blueprint-spec
+# This file enables one-click deploy via the "Deploy to Render" button in the README.
+
+services:
+  - type: web
+    name: realtime-chat
+    runtime: node
+    plan: free
+    region: singapore  # Closest to India for low latency
+    branch: main
+    rootDir: .
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    # Free tier: sleeps after 15 min idle, wakes on first request (~30 sec)
