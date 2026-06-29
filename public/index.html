@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Real-time chat app with multiple rooms, built with Node.js and Socket.io." />
+  <title>Realtime Chat · Socket.io</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Join screen -->
+  <div id="joinScreen" class="join-screen">
+    <div class="join-card">
+      <div class="join-card__icon">💬</div>
+      <h1 class="join-card__title">Realtime Chat</h1>
+      <p class="join-card__subtitle">Join a room and start chatting in real time.</p>
+
+      <form id="joinForm" class="join-form">
+        <label class="field">
+          <span class="field__label">Nickname</span>
+          <input id="nickInput" type="text" class="field__input" placeholder="e.g. arjun" maxlength="30" required autocomplete="off" />
+        </label>
+
+        <label class="field">
+          <span class="field__label">Room</span>
+          <input id="roomInput" type="text" class="field__input" placeholder="general" maxlength="50" autocomplete="off" />
+          <span class="field__hint">Leave empty to join the general room. Anyone with the room name can join.</span>
+        </label>
+
+        <button type="submit" class="join-btn">Join Chat →</button>
+      </form>
+
+      <p class="join-card__note">Built with Node.js, Express & Socket.io</p>
+    </div>
+  </div>
+
+  <!-- Chat screen -->
+  <div id="chatScreen" class="chat" hidden>
+    <aside class="chat__sidebar">
+      <div class="sidebar__header">
+        <h1 class="sidebar__brand"><span>💬</span> Realtime Chat</h1>
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+      </div>
+
+      <div class="sidebar__section">
+        <div class="sidebar__label">Current Room</div>
+        <div id="currentRoom" class="sidebar__room">—</div>
+        <button id="leaveRoomBtn" class="text-btn" type="button">Leave room</button>
+      </div>
+
+      <div class="sidebar__section">
+        <div class="sidebar__label">Online — <span id="userCount">0</span></div>
+        <ul id="userList" class="user-list"></ul>
+      </div>
+
+      <div class="sidebar__footer">
+        <span class="sidebar__hint">Tip: share the room name with friends to chat together.</span>
+      </div>
+    </aside>
+
+    <main class="chat__main">
+      <header class="chat__header">
+        <h2 id="roomTitle" class="chat__room-title"># general</h2>
+        <span id="connectionStatus" class="status status--connecting">connecting…</span>
+      </header>
+
+      <div id="messages" class="messages" aria-live="polite">
+        <div class="messages__empty">No messages yet. Say hi! 👋</div>
+      </div>
+
+      <div id="typingIndicator" class="typing-indicator" hidden></div>
+
+      <form id="messageForm" class="message-form">
+        <input
+          id="messageInput"
+          type="text"
+          class="message-form__input"
+          placeholder="Type a message…"
+          autocomplete="off"
+          maxlength="1000"
+          disabled
+        />
+        <button type="submit" class="message-form__send" disabled>Send</button>
+      </form>
+    </main>
+  </div>
+
+  <!-- Socket.io client served by the server -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

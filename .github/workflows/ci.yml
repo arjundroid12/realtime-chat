@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate & test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Verify required files exist
+        run: |
+          set -e
+          for f in package.json src/server.js public/index.html public/styles.css public/app.js README.md LICENSE; do
+            if [ ! -f "$f" ]; then
+              echo "❌ Missing required file: $f"
+              exit 1
+            fi
+            echo "✅ Found: $f"
+          done
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Syntax check (server.js)
+        run: node --check src/server.js
+
+      - name: Smoke test (import server module)
+        run: |
+          node -e "
+          import('./src/server.js').then(() => {
+            console.log('✅ server.js imports successfully');
+            process.exit(0);
+          }).catch((err) => {
+            console.error('❌ server.js failed to import:', err.message);
+            process.exit(1);
+          });
+          "
+
+      - name: Report
+        run: echo "🎉 All checks passed. Realtime chat is ready to deploy."

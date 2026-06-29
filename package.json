@@ -1,0 +1,28 @@
+{
+  "name": "realtime-chat",
+  "version": "1.0.0",
+  "description": "Real-time chat application with multiple rooms, built with Node.js, Express, and Socket.io.",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test"
+  },
+  "keywords": [
+    "chat",
+    "realtime",
+    "socket-io",
+    "node",
+    "express"
+  ],
+  "author": "Arjun Vashishtha",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
