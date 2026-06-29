@@ -19,6 +19,16 @@
 - **Dark / light theme** — auto-detects system preference, remembers your choice
 - **Responsive design** — works on desktop and mobile
 
+## 📸 Screenshots
+
+**Join screen** — pick a nickname and room name:
+
+![Join Screen](./docs/screenshot-join.png)
+
+**Chat room** — real-time messages, online users, typing indicators:
+
+![Chat Room](./docs/screenshot-chat.png)
+
 ## 🚀 Live Demo
 
 This app requires a backend server (it can't run on GitHub Pages because Pages only serves static files). Deploy it to any Node.js host:
@@ -120,6 +130,9 @@ realtime-chat/
 ├── .github/
 │   └── workflows/
 │       └── ci.yml
+├── docs/                    # README screenshots
+│   ├── screenshot-join.png
+│   └── screenshot-chat.png
 ├── public/                  # Static frontend served by Express
 │   ├── app.js               # Client-side Socket.io logic
 │   ├── index.html           # Chat UI shell

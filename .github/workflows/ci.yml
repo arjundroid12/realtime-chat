@@ -25,7 +25,7 @@ jobs:
       - name: Verify required files exist
         run: |
           set -e
-          for f in package.json src/server.js public/index.html public/styles.css public/app.js README.md LICENSE; do
+          for f in package.json src/server.js public/index.html public/styles.css public/app.js docs/screenshot-join.png docs/screenshot-chat.png README.md LICENSE; do
             if [ ! -f "$f" ]; then
               echo "❌ Missing required file: $f"
               exit 1
